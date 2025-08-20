@@ -10,22 +10,45 @@ export async function getAll(req, res) {
 
 // Add more logic
 export async function create(req, res) {
-  // GET all fields needed from req.body
-  // ATTEMPT to save
-  // HANDLE error
-  // RESPONSE created status with poll
-  res.status(201).json({
-    success: 'Successfully created poll',
-    // newly add poll
-  });
+  try{
+    const { question, options, status } = req.body;
+    const poll = new Poll({
+      question,
+      options,
+      status, 
+    });
+
+    await poll.save();
+    res.status(201).json({
+        success: 'Successfully created poll',        
+      });
+
+  }catch(error){
+   res.status(400).json({  
+      message: "Failed to create poll",
+      error: error,
+    });  
+  }
+
+ 
 }
 
-export async function getOne(req, res) {
-  // FIND poll from req.params
-  // IF NON then response 404
-  // OTHERWISE response the poll
+export async function getOne(req, res) {  
+  try{
+    const { id } = req.params;
+    const poll = await Poll.findById(id);
+
+    res.status(200).json({
+      data: poll,
+    });
+
+  }catch(error){
+    res.status(404).json({
+      message: "Failed to find data",
+      error : error,
+    })
+  }
   res.json({
-    success: 'Successfully get one poll',
-    // find poll
+    success: 'Successfully get one poll',   
   });
 }

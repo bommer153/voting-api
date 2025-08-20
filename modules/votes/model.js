@@ -6,16 +6,7 @@ const pollSchema = new Schema(
       type: String,
       required: true,
     },
-    options: {
-      type: [String],
-      required: true,
-    },
-    status: {
-      type: String,
-      enum: ["active", "closed", "archived"],
-      default: "active", 
-      required: false,
-    },    
+    // Add other fields
   },
   {
     timestamps: true,
