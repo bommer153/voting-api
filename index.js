@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 app.set('port', PORT);
 
 app.use('/api/v1/polls', pollRoutes);
+app.use('/api/v1/votes', voteRoutes);
 // Add other routes
 
 app.listen(PORT, () => {

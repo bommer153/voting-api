@@ -13,4 +13,4 @@ const pollSchema = new Schema(
   }
 );
 
-export const Poll = model('Poll', pollSchema);
+export const Vote = model('vote', pollSchema);
